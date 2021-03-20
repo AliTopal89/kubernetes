@@ -2,6 +2,13 @@ notes from kubernetes cluster installation tutorial
 
 install cloud servers ssh cloud_user@[ip] then password for control panel and workers
 
+`sudo swapoff -a`
+
+`sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab`
+
+ on all nodes disable swap, because the idea of kubernetes is to pack instance to %100
+ utilized capacity. If memory swapping is allowed to occur on a host system, this can lead to performance and stability issues within Kubernetes. 
+
 sudo apt-mark hold <package> - even when you apt-get update the packages stay the same version
 
 `sudo kubeadm init --pod-network-cidr x.x.x.x/x` - initialize the cluster and setup kube command line tool (kubectl)
