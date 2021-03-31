@@ -12,6 +12,19 @@ install cloud servers ssh cloud_user@[ip] then password for control panel and wo
 sudo apt-mark hold <package> - even when you apt-get update the packages stay the same version
 
 `sudo kubeadm init --pod-network-cidr x.x.x.x/x` - initialize the cluster and setup kube command line tool (kubectl)
+  - if you run in to prefilight errors such as
+  
+  ```
+    error execution phase preflight: [preflight] Some fatal errors occurred:
+	  [ERROR FileContent--proc-sys-net-bridge-bridge-nf-call-iptables]: /proc/sys/net/bridge/bridge-nf-call-iptables does not exist
+  ```
+
+    - this was the solution for me
+      ```s
+      vi /etc/sysctl.conf
+      net.bridge.bridge-nf-call-iptables = 1
+      sysctl -p
+      ```
 
 kubeadm join 10.0.1.101:6443<x.x.x:port> --token blah.blah \
     --discovery-token-ca-cert-hash sha256:abcd123abc123abcd090909
@@ -59,3 +72,25 @@ k8s-control   Ready    control-plane,master   24m   v1.20.1
 k8s-worker1   Ready    <none>                 99s   v1.20.1
 k8s-worker2   Ready    <none>                 82s   v1.20.1
 ```
+### Kubectl API basic cheat sheet
+
+- Get a list of Pods in the kube-system namespace:
+  `kubectl get pods -n kube-system`
+- Get the same list of Pods using the raw Kubernetes API:
+  `kubectl get --raw /api/v1/namespaces/kube-system/pods`
+- Get information on a single Pod using the raw API:
+  `kubectl get --raw /api/v1/namespaces/kube-system/pods/etcd-k8s-control`
+- Read status of the specified Namespace
+  `kubectl get --raw /api/v1/namespaces/kube-system/status`
+- Show Merged kubeconfig settings
+  `kubectl config view`
+- List all pods in all namespaces
+ `kubectl get pods --all-namespaces`
+- Describe specific pod with verbose output (hint: use -n for namespace)
+`kubectl describe pods -n kube-system calico-kube-controllers-blah-123`
+
+
+#### Notes
+
+1.[Kubernetes API ](https://kubernetes.io/docs/reference/kubernetes-api/)
+1.[Kubectl cheat sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
