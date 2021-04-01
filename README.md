@@ -94,3 +94,14 @@ k8s-worker2   Ready    <none>                 82s   v1.20.1
 
 1.[Kubernetes API ](https://kubernetes.io/docs/reference/kubernetes-api/)
 1.[Kubectl cheat sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
+
+### Kubernetes objects
+
+**Kubernetes objects** are persistent data entities stored by Kubernetes. They represent the state of your cluster. Pods are the kubernetes objects that are used to run and manage containers.
+
+Kubernetes object includes two nested object fields
+For objects that have a `spec`, you have to set this when you create the object, providing a description of the characteristics you want the resource to have: its *desired state*.
+
+The `status` describes the *current state* of the object, supplied and updated by the Kubernetes system and its components.
+
+The control plane works to implement the state represented by the object and the contanier is spun up in one of the nodes. Worker nodes constantly notify the API about the status of each contanier to control plane.
