@@ -105,3 +105,21 @@ For objects that have a `spec`, you have to set this when you create the object,
 The `status` describes the *current state* of the object, supplied and updated by the Kubernetes system and its components.
 
 The control plane works to implement the state represented by the object and the contanier is spun up in one of the nodes. Worker nodes constantly notify the API about the status of each contanier to control plane.
+
+### Container with pods
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+spec:
+  contaniers:
+  - name: nginx
+    image: nginx
+```
+
+- `kind` - specifies the object type as Pod, (this could be Service, Deployments etc), we are telling kubernetest to create a pod object.
+- `metadata.name` - The name of the pod object (this could be something like nginx-deployment etc.)
+- `spec.containers` - provides a list of one or more contaniers
+- `spec.containers[].image` - container image which contains the software we want our contanier to actually run. (docker image name) 
