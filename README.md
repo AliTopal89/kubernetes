@@ -123,3 +123,40 @@ spec:
 - `metadata.name` - The name of the pod object (this could be something like nginx-deployment etc.)
 - `spec.containers` - provides a list of one or more contaniers
 - `spec.containers[].image` - container image which contains the software we want our contanier to actually run. (docker image name) 
+
+### Kubectl lab
+
+```kubectl get pods -n default
+NAME                READY   STATUS             RESTARTS   AGE
+auth-microservice   1/1     Running            0          119m
+data-backend        1/1     Running            0          119m
+web-frontend        0/1     CrashLoopBackOff   28         119m
+```
+
+`kubectl -n default describe pod web-frontend`
+is to describe your pod, which can be used to see any error in pod creation and running the pod like lack of resource, etc.
+
+`kubectl delete pod web-frontend`
+
+`vi webfront-end.yml`
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-frontend
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+```
+
+`kubectl create -f web-frontend.yml`
+
+```
+kubectl get pods -n default
+NAME                READY   STATUS    RESTARTS   AGE
+auth-microservice   1/1     Running   0          49m
+data-backend        1/1     Running   0          49m
+web-frontend        1/1     Running   0          71s
+```
