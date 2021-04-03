@@ -160,3 +160,30 @@ auth-microservice   1/1     Running   0          49m
 data-backend        1/1     Running   0          49m
 web-frontend        1/1     Running   0          71s
 ```
+
+### LAB create nginx and redis pod
+
+`kubectl apply -f https://k8s.io/examples/application/deployment.yaml`
+
+or vi and use an example from above from contanier with pods tutorial on control plane
+
+- `kubectl create -f nginx-pod.yml`
+
+- `kubectl get pods -o wide `- get verbose output of runnning pod
+
+- `curl -kv $NGINX_IP_FROM_ABOVE`
+
+- do the same but for redis for example
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: redis
+spec:
+  containers:
+  - name: redis
+    image: redis:5.0.4
+    ports:
+    - containerPort: 6379
+```
