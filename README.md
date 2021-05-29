@@ -1,4 +1,18 @@
-notes from kubernetes cluster installation tutorial
+### Kubernetes Clusters 
+
+Kubernetes coordinates a highly available cluster of computers that are connected to work as a single unit. The abstractions in Kubernetes allow you to deploy containerized applications to a cluster without tying them specifically to individual machines.
+
+A Kubernetes cluster consists of two types of resources:
+
+The Control Plane coordinates the cluster
+- Control Plane coordinates all activities in your cluster, such as scheduling applications, maintaining applications' desired state, scaling applications, and rolling out new updates.
+Nodes are the workers that run applications
+- Each node has a Kubelet, which is an agent for managing the node and communicating with the Kubernetes control plane.
+- The node should also have tools for handling contaniers and operations such as *containerd* or *docker*
+  - The **docker** command line tool can build container images, pull them from registries, create, start and manage containers. ... commands. **containerd**: This is a daemon process that manages and runs containers
+- A Kubernetes cluster that handles production traffic should have a minimum of three nodes.
+
+### notes from kubernetes cluster installation tutorial
 
 install cloud servers ssh cloud_user@[ip] then password for control panel and workers
 
