@@ -12,6 +12,12 @@ Nodes are the workers that run applications
   - The **docker** command line tool can build container images, pull them from registries, create, start and manage containers. ... commands. **containerd**: This is a daemon process that manages and runs containers
 - A Kubernetes cluster that handles production traffic should have a minimum of three nodes.
 
+### Kubernetes Deployments
+
+Once you have a running Kubernetes cluster, you can deploy your containerized applications on top of it. 
+
+Once the application instances are created, a Kubernetes Deployment Controller continuously monitors those instances. If the Node hosting an instance goes down or is deleted, the Deployment controller replaces the instance with an instance on another Node in the cluster. **This provides a self-healing mechanism to address machine failure or maintenance**.
+
 ### notes from kubernetes cluster installation tutorial
 
 install cloud servers ssh cloud_user@[ip] then password for control panel and workers
